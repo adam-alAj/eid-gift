@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الى حبيبة قلبي</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f8f3e8;
+      font-family: 'Cairo', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      flex-direction: column;
+    }
+
+    .envelope {
+      position: relative;
+      width: 320px;
+      height: 200px;
+      background: #f2e6c2;
+      border: 2px solid #c9a56a;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      transform-origin: top;
+      transform: perspective(1000px) rotateX(0deg);
+      transition: transform 1.2s ease, height 1s ease;
+    }
+
+    .ribbon {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      height: 100%;
+      background: rgba(200, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: opacity 0.5s ease;
+      z-index: 2;
+    }
+
+    .ribbon span {
+      background: red;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    .message {
+      opacity: 0;
+      padding: 20px;
+      font-size: 1.1rem;
+      color: #3b2f13;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      transition: opacity 1.5s ease 0.5s;
+    }
+
+    .opened {
+      height: auto;
+      transform: perspective(1000px) rotateX(10deg);
+    }
+
+    .opened .ribbon {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .opened .message {
+      opacity: 1;
+    }
+
+    .download-btn {
+      margin-top: 20px;
+      background: #d88a2b;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s ease;
+    }
+
+    .download-btn:hover {
+      background: #a6641f;
+    }
+  </style>
+</head>
+<body>
+
+  <audio id="bg-music" src="https://cdn.pixabay.com/audio/2023/03/25/audio_8578d30f43.mp3" preload="auto"></audio>
+
+  <div class="envelope" id="envelope">
+    <div class="ribbon" onclick="openEnvelope()">
+      <span>اضغطي لفتح الهدية 🎁</span>
+    </div>
+    <div class="message" id="message">
+      عيد أضحى مبارك يا حب قلبي 💖
+      حتى وإن كانت بيننا المسافات،
+      يبقى حبك أقرب ما يكون لروحي.
+      دائما بقلبي وبعقلي ما تتخيلي كمية الحب 
+      الي اعطتيني اياها وكم بنفسي اجي هسا 
+      واحضنك اسبوع زمن مع بوسة تاكل خدودك
+    
+      دائما تذكري اني معك واحبك 
+      ومستحيل افكر بغيرك.
+
+      كل عام وأنتِ سعادتي وبهجتي ❤️
+    </div>
+  </div>
+
+  <button class="download-btn" onclick="downloadAsImage()">📩 تحميل الرسالة كصورة</button>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script>
+    function openEnvelope() {
+      const envelope = document.getElementById('envelope');
+      envelope.classList.add('opened');
+      const music = document.getElementById('bg-music');
+      music.play();
+    }
+
+    function downloadAsImage() {
+      const node = document.getElementById('envelope');
+      html2canvas(node).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'eid_message.png';
+        link.href = canvas.toDataURL();
+        link.click();
+      });
+    }
+  </script>
+</body>
+</html>
